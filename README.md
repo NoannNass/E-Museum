@@ -16,3 +16,6 @@
 ## Use Case
 
 <img width="757" alt="Capture d’écran 2025-05-14 à 15 13 30" src="https://github.com/user-attachments/assets/1b7fad99-ecd4-4089-97dc-ba5725180096" />
+
+## Architecure
+<img width="669" alt="Capture d’écran 2025-05-14 à 15 48 40" src="https://github.com/user-attachments/assets/0d518dc0-e988-421e-8be7-ac4495ac0313" />
