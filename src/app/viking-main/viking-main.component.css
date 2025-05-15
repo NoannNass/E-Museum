@@ -1,0 +1,10 @@
+.vikingMain{
+    display: flex;
+    position: absolute;
+    height: 100%;
+    width: 300vh;
+    top: 0;
+    z-index: 300;
+    gap: 200px;
+    background-color: transparent;
+}

@@ -11,6 +11,16 @@ import { HelmetComponent } from "../helmet/helmet.component";
 })
 export class MainComponent {
 
+  switchTheme(){
+    const RomanDisplay = document.querySelector(".main");
 
+    if (RomanDisplay) {
+      console.log("click");
+      RomanDisplay.classList.add("active");
+      setTimeout(() => {
+        RomanDisplay.classList.remove("active");
+      }, 1000);
+    }
+  }
 
 }
