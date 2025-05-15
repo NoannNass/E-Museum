@@ -23,3 +23,7 @@ Les fichiers 3D sont en .glb donc déjà binariser et supporter par MySQL
 
 ## Architecure
 <img width="669" alt="Capture d’écran 2025-05-14 à 15 48 40" src="https://github.com/user-attachments/assets/0d518dc0-e988-421e-8be7-ac4495ac0313" />
+
+##Workflow du stockage
+
+![IMG_8499](https://github.com/user-attachments/assets/066373a5-a22a-46d8-9723-406fb02df185)
