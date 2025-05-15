@@ -4,6 +4,7 @@
     width: 300vh;
     background-image: url(/bg2.png);
     gap: 10%;
+    z-index: 150;
     transition: 1s;
 }
 
@@ -11,19 +12,15 @@
     opacity: 0;
 }
 
-.vikingMain{
-    display: flex;
-    height: 100%;
-    width: 300vh;
-    position: absolute;
-    z-index: 300;
-    background-color: aqua;
+.main.active.despawn{
+    display: none;
 }
 
 .btnsuite{
     display: flex;
     justify-content: center;
     align-items: center;
+    /* margin-right: 20px; */
 }
 
 .btnsuite button{

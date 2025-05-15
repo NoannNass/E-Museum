@@ -18,8 +18,13 @@ export class MainComponent {
       console.log("click");
       RomanDisplay.classList.add("active");
       setTimeout(() => {
-        RomanDisplay.classList.remove("active");
-      }, 1000);
+        window.scroll({
+          top: 0,
+          left: 0,
+          behavior: "smooth",
+        })
+        RomanDisplay.classList.add("despawn");
+      }, 200);
     }
   }
 

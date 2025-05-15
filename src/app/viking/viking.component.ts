@@ -10,9 +10,9 @@ import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
   styleUrl: './viking.component.css'
 })
 export class VikingComponent implements OnInit, OnDestroy  {
-  @Input() modelPath5: string = '/models/armor.glb';
-  @Input() modelScale5: number = 1;
-  @Input() modelPosition5: { x: number, y: number, z: number } = { x: 0, y: 0, z: 0 };
+  @Input() modelPath: string = '/models/armor.glb';
+  @Input() modelScale: number = 1;
+  @Input() modelPosition: { x: number, y: number, z: number } = { x: 0, y: 0, z: 0 };
 
   private scene: THREE.Scene | null = null;
   private camera: THREE.PerspectiveCamera | null = null;
@@ -46,15 +46,11 @@ export class VikingComponent implements OnInit, OnDestroy  {
       return;
     }
 
-    // Créer la scène du pilier
     const scenePilier = new THREE.Scene();
-
-    // Créer la caméra
     const cameraPilier = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
-    cameraPilier.position.set(0, 0, 300);
+    cameraPilier.position.set(0, 0, 7);
     cameraPilier.lookAt(0, 0, 0);
 
-    // Créer le renderer
     const rendererPilier = new THREE.WebGLRenderer({ 
       canvas: canvas, 
       antialias: true,
@@ -63,24 +59,29 @@ export class VikingComponent implements OnInit, OnDestroy  {
     rendererPilier.setSize(canvas.clientWidth, canvas.clientHeight);
     rendererPilier.setClearColor(0x000000, 0);
 
-    // Créer le pilier
-    const pilierGeometry = new THREE.BoxGeometry(200, 250, 200);
-    const pilierMaterial = new THREE.MeshPhongMaterial({ 
-      color: 0x808080,
-      shininess: 30
-    });
-    const pilier = new THREE.Mesh(pilierGeometry, pilierMaterial);
-    scenePilier.add(pilier);
+    const loader = new GLTFLoader();
+    loader.load('/models/pillier.glb', 
+      (gltf) => {
+        const pilier = gltf.scene;
+        pilier.position.set(-2, -8, 0);
+        pilier.scale.set(7, 7, 7);
+        scenePilier.add(pilier);
+      },
+      (progress) => {
+        console.log(`Chargement du pilier: ${(progress.loaded / progress.total * 100).toFixed(2)}%`);
+      },
+      (error) => {
+        console.error('Erreur de chargement du pilier:', error);
+      }
+    );
 
-    // Ajouter les lumières
-    const lightPilier = new THREE.PointLight(0xffffff, 0);
-    lightPilier.position.set(0, 0, 0);
+    const lightPilier = new THREE.PointLight(0xffffff, 2);
+    lightPilier.position.set(10, 10, 50);
     scenePilier.add(lightPilier);
 
-    const ambientLightPilier = new THREE.AmbientLight(0xffffff, 0.5);
+    const ambientLightPilier = new THREE.AmbientLight(0xffffff, 1);
     scenePilier.add(ambientLightPilier);
 
-    // Animation du pilier
     function animatePilier() {
       requestAnimationFrame(animatePilier);
       rendererPilier.render(scenePilier, cameraPilier);
@@ -95,6 +96,7 @@ export class VikingComponent implements OnInit, OnDestroy  {
     });
     resizeObserverPilier.observe(canvas);
   }
+
 
   private initThreeJS() {
     const canvas = document.getElementById('model5') as HTMLCanvasElement;
@@ -129,13 +131,13 @@ export class VikingComponent implements OnInit, OnDestroy  {
     light.position.set(10, 0, 120);
     this.scene.add(light);
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 5);
     this.scene.add(ambientLight);
 
     const loader = new GLTFLoader();
-    console.log('Tentative de chargement du modèle:', this.modelPath5);
+    console.log('Tentative de chargement du modèle:', this.modelPath);
 
-    loader.load(this.modelPath5, 
+    loader.load(this.modelPath, 
       (gltf) => {
         if (this.model) {
           this.scene?.remove(this.model);
@@ -153,25 +155,25 @@ export class VikingComponent implements OnInit, OnDestroy  {
           }
         });
 
-        this.model.scale.set(this.modelScale5, this.modelScale5, this.modelScale5);
+        this.model.scale.set(this.modelScale, this.modelScale, this.modelScale);
         this.model.position.set(
-          this.modelPosition5.x,
-          this.modelPosition5.y,
-          this.modelPosition5.z
+          this.modelPosition.x,
+          this.modelPosition.y,
+          this.modelPosition.z
         );
 
         this.scene?.add(this.model);
         console.log('Modèle chargé avec succès:', {
-          path: this.modelPath5,
+          path: this.modelPath,
           scale: this.model.scale,
           position: this.model.position
         });
       },
       (progress) => {
-        console.log(`Chargement ${this.modelPath5}: ${(progress.loaded / progress.total * 100).toFixed(2)}%`);
+        console.log(`Chargement ${this.modelPath}: ${(progress.loaded / progress.total * 100).toFixed(2)}%`);
       },
       (error) => {
-        console.error('Erreur de chargement du modèle:', this.modelPath5, error);
+        console.error('Erreur de chargement du modèle:', this.modelPath, error);
       }
     );
 

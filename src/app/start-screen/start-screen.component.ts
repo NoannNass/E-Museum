@@ -13,6 +13,7 @@ export class StartScreenComponent {
 
     if (display) {
       display.classList.add("active");
+      document.body.style.overflowX = "scroll"
     } 
   }
 

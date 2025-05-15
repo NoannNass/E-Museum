@@ -1,7 +1,6 @@
 .startContainer{
     display: flex;
     position: absolute;
-    
     backdrop-filter: blur(10px);
     height: 100%;
     width: 100%;

@@ -46,15 +46,11 @@ export class ArmorComponent implements OnInit, OnDestroy  {
       return;
     }
 
-    // Créer la scène du pilier
     const scenePilier = new THREE.Scene();
-
-    // Créer la caméra
     const cameraPilier = new THREE.PerspectiveCamera(75, canvas.clientWidth / canvas.clientHeight, 0.1, 1000);
-    cameraPilier.position.set(0, 0, 300);
+    cameraPilier.position.set(0, 0, 7);
     cameraPilier.lookAt(0, 0, 0);
 
-    // Créer le renderer
     const rendererPilier = new THREE.WebGLRenderer({ 
       canvas: canvas, 
       antialias: true,
@@ -63,24 +59,29 @@ export class ArmorComponent implements OnInit, OnDestroy  {
     rendererPilier.setSize(canvas.clientWidth, canvas.clientHeight);
     rendererPilier.setClearColor(0x000000, 0);
 
-    // Créer le pilier
-    const pilierGeometry = new THREE.BoxGeometry(200, 250, 200);
-    const pilierMaterial = new THREE.MeshPhongMaterial({ 
-      color: 0x808080,
-      shininess: 30
-    });
-    const pilier = new THREE.Mesh(pilierGeometry, pilierMaterial);
-    scenePilier.add(pilier);
+    const loader = new GLTFLoader();
+    loader.load('/models/pillier.glb', 
+      (gltf) => {
+        const pilier = gltf.scene;
+        pilier.position.set(-2, -8, 0);
+        pilier.scale.set(7, 7, 7);
+        scenePilier.add(pilier);
+      },
+      (progress) => {
+        console.log(`Chargement du pilier: ${(progress.loaded / progress.total * 100).toFixed(2)}%`);
+      },
+      (error) => {
+        console.error('Erreur de chargement du pilier:', error);
+      }
+    );
 
-    // Ajouter les lumières
-    const lightPilier = new THREE.PointLight(0xffffff, 0);
-    lightPilier.position.set(0, 0, 0);
+    const lightPilier = new THREE.PointLight(0xffffff, 2);
+    lightPilier.position.set(10, 10, 50);
     scenePilier.add(lightPilier);
 
-    const ambientLightPilier = new THREE.AmbientLight(0xffffff, 0.5);
+    const ambientLightPilier = new THREE.AmbientLight(0xffffff, 0.7);
     scenePilier.add(ambientLightPilier);
 
-    // Animation du pilier
     function animatePilier() {
       requestAnimationFrame(animatePilier);
       rendererPilier.render(scenePilier, cameraPilier);
@@ -129,7 +130,7 @@ export class ArmorComponent implements OnInit, OnDestroy  {
     light.position.set(10, 0, 120);
     this.scene.add(light);
 
-    const ambientLight = new THREE.AmbientLight(0xffffff, 1);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 5);
     this.scene.add(ambientLight);
 
     const loader = new GLTFLoader();
