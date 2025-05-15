@@ -1,0 +1,70 @@
+<div class="suggestion-form-container">
+  <form (ngSubmit)="onSubmit()" #suggestionForm="ngForm" class="suggestion-form">
+    <h2>Suggérer un nouveau modèle</h2>
+    
+    <div class="form-group">
+      <label for="modelName">Nom du modèle</label>
+      <input 
+        type="text" 
+        id="modelName"
+        name="modelName"
+        [(ngModel)]="suggestionModel.modelName"
+        required
+        class="form-control">
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description</label>
+      <textarea 
+        id="description"
+        name="description"
+        [(ngModel)]="suggestionModel.description"
+        required
+        class="form-control"
+        rows="4"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="category">Catégorie</label>
+      <select 
+        id="category"
+        name="category"
+        [(ngModel)]="suggestionModel.category"
+        required
+        class="form-control">
+        <option value="">Sélectionnez une catégorie</option>
+        <option *ngFor="let cat of categories" [value]="cat">{{cat}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="era">Époque</label>
+      <select 
+        id="era"
+        name="era"
+        [(ngModel)]="suggestionModel.era"
+        required
+        class="form-control">
+        <option value="">Sélectionnez une époque</option>
+        <option *ngFor="let era of eras" [value]="era">{{era}}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input 
+        type="email" 
+        id="email"
+        name="email"
+        [(ngModel)]="suggestionModel.email"
+        required
+        class="form-control"
+        pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$">
+    </div>
+
+    <div class="form-actions">
+      <button type="submit" class="submit-btn">Envoyer la suggestion</button>
+      <button type="button" (click)="resetForm()" class="reset-btn">Réinitialiser</button>
+    </div>
+  </form>
+</div>

@@ -16,6 +16,12 @@
     top: 10%;
 }
 
+a{
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+}
+
 .container{
     width: 100%;
     display: flex;
@@ -24,4 +30,18 @@
     padding: 5px;
     flex-direction: column;
     height: 100%;
+}
+
+.card{
+    background-color: rgb(62, 54, 54);
+    position: absolute;
+    top: 80%;
+    text-align: center;
+    right: 2%;
+    padding: 20px 40px;
+    color: white;
+}
+
+.card *{
+    cursor: default;
 }

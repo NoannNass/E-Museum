@@ -25,3 +25,22 @@
     flex-direction: column;
     height: 100%;
 }
+
+.card{
+    background-color: rgb(62, 54, 54);
+    position: absolute;
+    top: 80%;
+    text-align: center;
+    right: -79%;
+    padding: 20px 40px;
+    color: white;
+    display: none;
+}
+
+.card *{
+    cursor: default;
+}
+
+.card.active{
+    display: flex;
+}

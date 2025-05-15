@@ -25,3 +25,22 @@
     flex-direction: column;
     height: 100%;
 }
+
+a{
+    cursor: pointer;
+    color: white;
+    text-decoration: none;
+}
+
+.card{
+    background-color: rgb(62, 54, 54);
+    position: absolute;
+    top: 80%;
+    text-align: center;
+    left: 7%;
+    padding: 20px 40px;
+    color: white;
+}
+.card *{
+    cursor:default;
+}
