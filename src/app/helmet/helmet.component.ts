@@ -134,6 +134,14 @@ export class HelmetComponent implements OnInit, OnDestroy  {
     const ambientLight = new THREE.AmbientLight(0xffffff, 5);
     this.scene.add(ambientLight);
 
+    // fetch("http://localhost:8080/upload",{
+    //   method : "post",
+    // }).then(res=>res.blob())
+    // .then(data=>{
+    //   console.log(data)
+    // })
+
+
     const loader = new GLTFLoader();
     console.log('Tentative de chargement du modèle:', this.modelPath3);
 
